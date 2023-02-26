@@ -69,11 +69,9 @@ function App() {
           <input type="password" name="pass" required />
           {renderErrorMessage("pass")}
         </div>
-         <div className="button-container">
+        <div className="button-container">
           <input type="submit" />
-        </div> 
-        
-         
+        </div>
       </form>
     </div>
   );
@@ -83,14 +81,10 @@ function App() {
  return (
     <div className="App">
       <div className="login-form">
-      
       <div className="title">Sign In</div>
-      
       {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
       </div>
       <h1>vishal</h1>
     </div>
   );
 }
-
-export default App;
