@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-//import ReactDOM from "react-dom";
 import "./style.css";
 
-// import './App.css';
-
-function App() {
+function Login() {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -60,13 +57,13 @@ function App() {
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
-          <label>Username </label>
-          <input type="text" name="uname" required />
+          {/* <label>Username </label> */}
+          <input type="text" name="uname" required placeholder="Username" />
           {renderErrorMessage("uname")}
         </div>
         <div className="input-container">
-          <label>Password </label>
-          <input type="password" name="pass" required />
+          {/* <label>Password </label> */}
+          <input type="password" name="pass" required placeholder="Password" />
           {renderErrorMessage("pass")}
         </div>
         <div className="button-container">
@@ -76,17 +73,14 @@ function App() {
     </div>
   );
 
-
-
- return (
-    <div className="App">
+  return (
+    <div className="form-container">
       <div className="login-form">
-      <div className="title"><h1>LogIn</h1></div>
-      {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+        <div className="title"><h5>Login</h5></div>
+        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
       </div>
-      
     </div>
   );
 }
 
-export default App;
+export default Login;
