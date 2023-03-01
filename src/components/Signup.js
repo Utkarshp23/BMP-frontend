@@ -1,7 +1,36 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 // import "./style.css";
 
 export default function Signup() {
+  useEffect(() => {
+    var userSel = document.getElementById('usertype');
+    var queSel = document.getElementById('secque');
+
+    fetch('http://localhost:8080/getusertypes')
+      .then((res) => res.json())
+      .then((res) => {
+        // console.log(res);
+
+        res.map((v) => {
+          var opt = document.createElement('option');
+          opt.value = v.ucatid;
+          opt.textContent = v.cattype;
+          userSel.appendChild(opt);
+        });
+      });
+
+    fetch('http://localhost:8080/getsecque')
+      .then((res) => res.json())
+      .then((res) => {
+        res.map((q) => {
+          var opt1 = document.createElement('option');
+          opt1.value = q.qid;
+          opt1.textContent = q.question;
+          queSel.appendChild(opt1);
+        });
+      });
+  }, []);
+
   const init = {
     username: '',
     password: '',
@@ -9,27 +38,45 @@ export default function Signup() {
     lname: '',
     email: '',
     contact: '',
-    usertype: '',
-    addline1: '',
-    addline2: '',
-    state: '',
-    city: '',
-    pincode: '',
-    secque: '',
-    ans: ''
+    ucatid_fk: '',
+    address: {
+      addline1: '',
+      addline2: '',
+      state: '',
+      city: '',
+      pincode: '',
+    },
+    qid_fk: '',
+    ans: '',
   };
 
   var reducer = (state, action) => {
     switch (action.type) {
       case 'register':
-        return { ...state, [action.field]: action.val };
+        return {
+          ...state,
+          [action.field]: action.val,
+          // [action.field]: { ...state[action.field],[action.field]: action.val },
+          address: {
+            ...state.address,
+            [action.field]: action.val,
+          },
+          // [action.field]: action.val,
+          // address: {
+          //   ...state.address,
+          //   [action.field]: action.val,
+          // },
+        };
     }
   };
+
+  // {...state , [action.fld]: {  ...state[action.fld],value: action.val, error: action.error, valid: action.valid, touched: action.touched}}
 
   const [user, dispatch] = useReducer(reducer, init);
 
   var register = (e) => {
     e.preventDefault();
+    console.log(`ucatid_fk:${user.ucatid_fk}`);
     const options = {
       method: 'POST',
       headers: {
@@ -37,8 +84,8 @@ export default function Signup() {
       },
       body: JSON.stringify(user),
     };
-
-    fetch('http://localhost:8080/createruser', options)
+    // console.log(`ucatid_fk:${user.ucatid_fk}`);
+    fetch('http://localhost:8080/signup', options)
       .then((res) => res.text())
       .then((msg) => {
         // setMsg(msg);
@@ -170,6 +217,8 @@ export default function Signup() {
           <label htmlFor=''>Select User type</label>
           <select
             className='form-control form-control-sm'
+            name='ucatid_fk'
+            id='usertype'
             onChange={(e) => {
               dispatch({
                 type: 'register',
@@ -179,8 +228,8 @@ export default function Signup() {
             }}
           >
             <option defaultValue={''}>Choose...</option>
-            <option>Owner</option>
-            <option>Customer</option>
+            {/* <option>Owner</option>
+            <option>Customer</option> */}
           </select>
         </div>
         <div className='mb-3'>
@@ -188,6 +237,7 @@ export default function Signup() {
           <input
             type='text'
             className='form-control form-control-sm'
+            name='addline1'
             id='inputAddress'
             placeholder='1234 Main St'
             required
@@ -205,6 +255,7 @@ export default function Signup() {
           <input
             type='text'
             className='form-control form-control-sm'
+            name='addline2'
             id='inputAddress2'
             placeholder='Apartment, studio, or floor'
             onChange={(e) => {
@@ -243,6 +294,7 @@ export default function Signup() {
               <input
                 type='text'
                 className='form-control form-control-sm'
+                name='city'
                 id='inputCity'
                 onChange={(e) => {
                   dispatch({
@@ -258,6 +310,7 @@ export default function Signup() {
               <input
                 type='text'
                 className='form-control form-control-sm'
+                name='pincode'
                 id='inputZip'
                 onChange={(e) => {
                   dispatch({
@@ -273,7 +326,7 @@ export default function Signup() {
         <div className='mb-3 form-row'>
           <label htmlFor='secque'>Select security question</label>
           <select
-            name='secque'
+            name='qid_fk'
             id='secque'
             className='form-control form-control-sm'
             onChange={(e) => {
