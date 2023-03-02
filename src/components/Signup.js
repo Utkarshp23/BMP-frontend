@@ -1,7 +1,11 @@
 import React, { useReducer, useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 // import "./style.css";
 
 export default function Signup() {
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     var userSel = document.getElementById('usertype');
     var queSel = document.getElementById('secque');
@@ -86,11 +90,15 @@ export default function Signup() {
     };
     // console.log(`ucatid_fk:${user.ucatid_fk}`);
     fetch('http://localhost:8080/signup', options)
-      .then((res) => res.text())
-      .then((msg) => {
-        // setMsg(msg);
-        console.log(msg);
+      .then((res) => {
+        if (res.ok) {
+          navigate("/login")
+        }
       })
+      // .then((msg) => {
+      //   // setMsg(msg);
+      //   // console.log(msg);
+      // })
       .catch((err) => console.log(err));
   };
 
