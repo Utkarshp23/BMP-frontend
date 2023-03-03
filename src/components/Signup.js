@@ -1,5 +1,6 @@
 import React, { useReducer, useEffect, useState } from 'react';
-// import "./style.css";
+
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
   useEffect(() => {
@@ -50,6 +51,8 @@ export default function Signup() {
     ans: '',
   };
 
+  const navigate=useNavigate();
+  
   var reducer = (state, action) => {
     switch (action.type) {
       case 'register':
@@ -90,6 +93,7 @@ export default function Signup() {
       .then((msg) => {
         // setMsg(msg);
         console.log(msg);
+        navigate("/login");
       })
       .catch((err) => console.log(err));
   };
