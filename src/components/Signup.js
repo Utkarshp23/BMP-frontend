@@ -1,8 +1,10 @@
 import React, { useReducer, useEffect, useState } from 'react';
-
-import { useNavigate } from 'react-router-dom';
+// import "./style.css";
 
 export default function Signup() {
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     var userSel = document.getElementById('usertype');
     var queSel = document.getElementById('secque');
@@ -93,8 +95,11 @@ export default function Signup() {
       .then((msg) => {
         // setMsg(msg);
         console.log(msg);
-        navigate("/login");
       })
+      // .then((msg) => {
+      //   // setMsg(msg);
+      //   // console.log(msg);
+      // })
       .catch((err) => console.log(err));
   };
 
