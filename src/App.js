@@ -14,6 +14,7 @@ import Home from './components/Home'
 import CustHomepage from './components/customer/CustHomepage';
 import OwnerHomepage from './components/owner/OwnerHomepage';
 import AdminHomepage from './components/admin/AdminHomepage';
+import Logout from './components/Logout';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route exact path='/CustHomepage' element={<CustHomepage/>}></Route>
             <Route exact path='/OwnerHomepage' element={<OwnerHomepage/>}></Route>
             <Route exact path='/AdminHomepage' element={<AdminHomepage/>}></Route>
+            <Route exact path='/logout' element={<Logout/>}></Route>
           </Routes>
         </div>
       </div>
