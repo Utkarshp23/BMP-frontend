@@ -50,9 +50,12 @@ function Login() {
           setMsg("Invalid username/password")
         }
         else {
-          reduxAction(login())
-          // console.log(store.dispatch.)
-          // store.dispatch(loggedSlice.actions.login)
+
+          //Setting state in store
+          var userid = obj.userid;
+          var ucatid_fk = obj.ucatid_fk;
+          reduxAction(login({ userid, ucatid_fk }))
+
           if (obj.ucatid_fk === 1) {
             navigate("/AdminHomepage");
           }
@@ -71,6 +74,9 @@ function Login() {
       <div className="login-form">
         <div className="form">
           <form>
+            <div className='mb-3'>
+              <h4>Login</h4>
+            </div>
             <div className="input-container">
               <input type="text" name="username" value={user.username} required placeholder="Username"
                 onChange={(u) => {
