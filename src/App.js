@@ -15,6 +15,8 @@ import CustHomepage from './components/customer/CustHomepage';
 import OwnerHomepage from './components/owner/OwnerHomepage';
 import AdminHomepage from './components/admin/AdminHomepage';
 import Logout from './components/Logout';
+import ShowProperty from './components/owner/ShowProperty';
+import AddProperty from './components/owner/AddProperty';
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
             <Route exact path='/OwnerHomepage' element={<OwnerHomepage/>}></Route>
             <Route exact path='/AdminHomepage' element={<AdminHomepage/>}></Route>
             <Route exact path='/logout' element={<Logout/>}></Route>
+            <Route exact path='/addproperty' element={<AddProperty/>}></Route>
+            <Route exact path='/showproperty' element={<ShowProperty/>}></Route>
           </Routes>
         </div>
       </div>

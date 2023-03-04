@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 export default function OwnerHomepage()
 {
+    const navigate = useNavigate();
+
+    const navigateToaddproperty = () => {
+        navigate('/addproperty');
+      };
+    
+      const navigateshowproperty = () => {
+        navigate('/showproperty');
+      };
     return(
-        <h1>Welcome to Owner Page</h1>
+
+        <div>
+            <h3><i>Manage Property</i></h3>
+            <input type="button" value="Add Property"
+            onClick={navigateToaddproperty}/><br/>
+            <input type="button" value="Show Properties"
+            onClick={navigateshowproperty}/>
+        </div>
     )
 }
+    
+     
