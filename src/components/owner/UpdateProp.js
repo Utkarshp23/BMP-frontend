@@ -1,11 +1,23 @@
 import React, { useReducer, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-export default function AddProperty() {
+export default function UpdateProp() {
   // const navigate = useNavigate();
 
   const myState = useSelector((state) => state.logged);
+  const location = useLocation();
+  var oldProp = location.state.property;
+  var index = location.state.index;
+  var fType = location.state.fType;
+  var pType = location.state.pType;
+
+  let statMap = new Map();
+  var keyNames = Object.keys(oldProp);
+  keyNames.forEach((v) => {
+    statMap.set(v, false);
+  });
+
   useEffect(() => {
     var ftype = document.getElementById('flattype');
     var ptype = document.getElementById('propertytype');
@@ -39,6 +51,7 @@ export default function AddProperty() {
   const navigate = useNavigate();
 
   const init = {
+    pid: '',
     ftypeid: '',
     ptypeid: '',
     price: '',
@@ -73,9 +86,27 @@ export default function AddProperty() {
 
   const [property, dispatch] = useReducer(reducer, init);
 
-  var addprop = (e) => {
+  var updateprop = (e) => {
     e.preventDefault();
-    property.userid = myState.userId;
+    property.pid = oldProp.pid;
+    property.userid = oldProp.userid;
+    
+    keyNames.forEach((v) => {
+      if (v === 'address') {
+        var keyNames2 = Object.keys(property.address);
+        keyNames2.map((m) => {
+          if (property.address[m] === '') {
+            // console.log(oldProp.address[m]);
+            property.address[m] = oldProp.address[m];
+          }
+        });
+      } else if (property[v] === '') {
+        // console.log(oldProp[v]);
+        property[v] = oldProp[v];
+      }
+    });
+
+    console.log(property);
     const options = {
       method: 'POST',
       headers: {
@@ -89,7 +120,6 @@ export default function AddProperty() {
           navigate('/myproperties');
         }
       })
-
       .catch((err) => console.log(err));
   };
 
@@ -97,7 +127,7 @@ export default function AddProperty() {
     <div className='form-container'>
       <form className='login-form signup-form'>
         <div className='mb-3'>
-          <h4>Add Property</h4>
+          <h4>Update Property</h4>
         </div>
         <div className='mb-3'>
           <label htmlFor=''>Select Flat type</label>
@@ -107,6 +137,7 @@ export default function AddProperty() {
             id='flattype'
             required
             onChange={(e) => {
+              statMap.set(e.target.name, true);
               dispatch({
                 type: 'addprop',
                 field: e.target.name,
@@ -114,7 +145,7 @@ export default function AddProperty() {
               });
             }}
           >
-            <option defaultValue={''}>Choose flat type...</option>
+            <option defaultValue={oldProp.ftypeid}>{fType}</option>
           </select>
         </div>
         <div className='mb-3'>
@@ -125,6 +156,7 @@ export default function AddProperty() {
             id='propertytype'
             required
             onChange={(e) => {
+              statMap.set(e.target.name, true);
               dispatch({
                 type: 'addprop',
                 field: e.target.name,
@@ -132,7 +164,7 @@ export default function AddProperty() {
               });
             }}
           >
-            <option defaultValue={''}>Choose property type...</option>
+            <option defaultValue={oldProp.ptypeid}>{pType}</option>
           </select>
         </div>
         <div className='mb-3'>
@@ -142,10 +174,12 @@ export default function AddProperty() {
             className='form-control form-control-sm'
             name='price'
             id='price'
+            defaultValue={oldProp.price}
             pattern='[0-9]{4,10}'
             title='Enter valid price'
             required
             onChange={(e) => {
+              statMap.set(e.target.name, true);
               dispatch({
                 type: 'addprop',
                 field: e.target.name,
@@ -161,9 +195,11 @@ export default function AddProperty() {
             className='form-control form-control-sm'
             name='addline1'
             id='inputAddress'
+            defaultValue={oldProp.address.addline1}
             placeholder='1234 Main St'
             required
             onChange={(e) => {
+              statMap.set(e.target.name, true);
               dispatch({
                 type: 'addprop',
                 field: e.target.name,
@@ -179,8 +215,10 @@ export default function AddProperty() {
             className='form-control form-control-sm'
             name='addline2'
             id='inputAddress2'
+            defaultValue={oldProp.address.addline2}
             placeholder='Apartment, studio, or floor'
             onChange={(e) => {
+              statMap.set(e.target.name, true);
               dispatch({
                 type: 'addprop',
                 field: e.target.name,
@@ -198,6 +236,7 @@ export default function AddProperty() {
               className='form-control form-control-sm'
               required
               onChange={(e) => {
+                statMap.set(e.target.name, true);
                 dispatch({
                   type: 'addprop',
                   field: e.target.name,
@@ -205,7 +244,9 @@ export default function AddProperty() {
                 });
               }}
             >
-              <option defaultValue={''}>Choose...</option>
+              <option defaultValue={oldProp.address.state}>
+                {oldProp.address.state}
+              </option>
               <option>Maharashtra</option>
               <option>Delhi</option>
               <option>Madhya-Prades</option>
@@ -219,8 +260,10 @@ export default function AddProperty() {
                 className='form-control form-control-sm'
                 name='city'
                 id='inputCity'
+                defaultValue={oldProp.address.city}
                 required
                 onChange={(e) => {
+                  statMap.set(e.target.name, true);
                   dispatch({
                     type: 'addprop',
                     field: e.target.name,
@@ -236,8 +279,10 @@ export default function AddProperty() {
                 className='form-control form-control-sm'
                 name='pincode'
                 id='inputZip'
+                defaultValue={oldProp.address.pincode}
                 required
                 onChange={(e) => {
+                  statMap.set(e.target.name, true);
                   dispatch({
                     type: 'addprop',
                     field: e.target.name,
@@ -253,10 +298,10 @@ export default function AddProperty() {
           type='submit'
           className='btn btn-primary'
           onClick={(e) => {
-            addprop(e);
+            updateprop(e);
           }}
         >
-          Add Property
+          Update Property
         </button>
       </form>
     </div>

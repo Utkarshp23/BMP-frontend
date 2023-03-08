@@ -60,7 +60,7 @@ const Navbar = () => {
           (myState.userType === 2 && (
             <ul className='navbar-nav mr-auto'>
               <li className='nav-item'>
-                <Link className='nav-link' to='/'>
+                <Link className='nav-link' to='/myproperties'>
                   My properties
                 </Link>
               </li>
