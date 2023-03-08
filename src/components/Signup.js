@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect, useState } from 'react';
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 export default function Signup() {
 
@@ -57,7 +57,7 @@ export default function Signup() {
   const navigateToLogin = () => {
     navigate('/login');
   };
-  
+
   var reducer = (state, action) => {
     switch (action.type) {
       case 'register':
@@ -94,10 +94,8 @@ export default function Signup() {
     };
     // console.log(`ucatid_fk:${user.ucatid_fk}`);
     fetch('http://localhost:8080/signup', options)
-      .then((res) => 
-      {
-        if(res.ok)
-        {
+      .then((res) => {
+        if (res.ok) {
           navigate("/login")
         }
       })
@@ -136,7 +134,7 @@ export default function Signup() {
                 val: e.target.value,
               });
             }}
-            />
+          />
         </div>
         <div className='mb-3'>
           <input
