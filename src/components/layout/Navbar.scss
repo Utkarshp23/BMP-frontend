@@ -17,13 +17,15 @@
   }
 
   .nav_buttons{
-    width: 18%;
+    // width: 18%;
+    font-size:smaller;
     padding-right: 1rem;
     ul{
+      gap: 15px;
       justify-content: space-around;
 
       li{
-        width: 150px;
+        // width: 150px;
         border-radius: 30px;
         display: flex;
         justify-content: center;
