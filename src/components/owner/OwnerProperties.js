@@ -39,7 +39,7 @@ export default function OwnerProperties() {
         console.log(obj);
         setFTypes(obj);
       })
-      .catch((Error) => alert('server problem ! sever is down1'));
+      .catch((Error) => alert('server problem ! sever is down'));
 
     fetch('http://localhost:8080/getproptype')
       .then((res) => {

@@ -84,7 +84,7 @@ const Navbar = () => {
           (myState.userType === 3 && (
             <ul className='navbar-nav mr-auto'>
               <li className='nav-item'>
-                <Link className='nav-item' to='/'>
+                <Link className='nav-item' to='/WishList'>
                   Wishlist
                 </Link>
               </li>
