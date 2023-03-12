@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
 import { HiOutlineCurrencyRupee } from 'react-icons/hi';
@@ -6,6 +6,7 @@ import { GoHome } from 'react-icons/go';
 import { RxCrossCircled } from 'react-icons/rx';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './PropertyPage.scss';
 
 const PropertyPage = () => {
@@ -17,7 +18,64 @@ const PropertyPage = () => {
   var fType = location.state.fType;
   var pType = location.state.pType;
 
+  // const myState = useSelector((state) => state.logged);
+
   const navigate = useNavigate();
+
+  const [requests, setRequests] = useState();
+  const [custs, setCusts] = useState([]);
+
+  useEffect(() => {
+    // Promise.all([
+    //   fetch(`http://localhost:8080/getpropreq/${property.pid}`),
+    //   fetch(`http://localhost:8080/getpropreq/${property.pid}`)
+    // ])
+    fetch(`http://localhost:8080/getpropreq/${property.pid}`)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then((res) => {
+        // console.log(res);
+        setRequests(res);
+        return res;
+      })
+      .then((res) => {
+        // var temp = [];
+        const fetchData = async (r) => {
+          const response = await fetch(
+            `http://localhost:8080/getusername/${r.buyerid}`
+          );
+          const newData = await response.json();
+          setCusts((custs) => [...custs, newData]);
+          // temp.push(newData);
+        };
+        res.forEach((r) => {
+          // fetch(`http://localhost:8080/getusername/${r.buyerid}`)
+          //   .then((res) => {
+          //     if (res.ok) {
+          //       return res.json();
+          //     }
+          //   })
+          //   .then((res) => {
+          //     // console.log(res);
+          //     temp.push(res);
+          //   })
+          //   .catch((e) => {
+          //     console.log(e);
+          //   });
+          fetchData(r);
+        });
+        // console.log(temp);
+        // setCusts(temp);
+        // console.log(custs);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   var handleFeedbacks = (e) => {
     e.preventDefault();
   };
@@ -100,59 +158,61 @@ const PropertyPage = () => {
           <span>{location.state.fType}</span>
         </div>
         <div className='prop-requests'>
-          <button
-            type='button'
-            className='btn btn-success position-relative'
-            onClick={(e) => {
-              handleRequests(e);
-            }}
-          >
-            Requests
-            <span className='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger'>
-              1+
-              <span className='visually-hidden'>unread messages</span>
-            </span>
+          <button type='button' class='btn btn-dark'>
+            Request <span class='badge badge-dark'>{custs.length}</span>
           </button>
           <ul className='list-group'>
-            <li className='list-group-item'>
-              <div className='cust-name'>Utkarsh</div>
-              <div className='req-btns'>
-                <AiOutlineCheckCircle
-                  className='req-acc'
-                  size={30}
-                  color='green'
-                />
-                <RxCrossCircled className='req-rej' size={30} color='red' />
-              </div>
-            </li>
-            <li className='list-group-item'>Dapibus ac facilisis in</li>
+            {custs.map((v) => (
+              <li className='list-group-item'>
+                <div className='cust-name'>
+                  <span>
+                    {v[0]} {v[1]}
+                  </span>
+                  {/* {console.log(v[0] + ' ' + v[1])} */}
+                </div>
+                <div className='req-btns'>
+                  <button type='button' class='btn btn-outline-success'>
+                    <AiOutlineCheckCircle className='req-acc' size={20} />
+                    Accept
+                  </button>
+                  <button type='button' class='btn btn-outline-danger'>
+                    <RxCrossCircled className='req-rej' size={20} />
+                    Reject
+                  </button>
+                </div>
+              </li>
+            ))}
+            {/* {console.log(custs.length)} */}
+
+            {/* <li className='list-group-item'>Dapibus ac facilisis in</li> */}
             {/* <li className='list-group-item'>Morbi leo risus</li>
             <li className='list-group-item'>Porta ac consectetur ac</li>
             <li className='list-group-item'>Vestibulum at eros</li> */}
           </ul>
         </div>
 
-        <div className='prop-feedbacks'>
+        {/* <div className='prop-feedbacks'>
           <button
             type='button'
             className='btn btn-secondary'
             onClick={(e) => {
               handleFeedbacks(e);
             }}
+            disabled
           >
             Feedbacks <span className='badge badge-light'>4</span>
           </button>
           <ul className='list-group'>
-            {/* <li className='list-group-item'>
+            <li className='list-group-item'>
               <span className='cust-name'>Utkarsh Pawar</span>
               <div className='requ-butts'>Hello</div>
-            </li> */}
+            </li>
             <li className='list-group-item'>Dapibus ac facilisis in</li>
             <li className='list-group-item'>Morbi leo risus</li>
-            {/* <li className='list-group-item'>Porta ac consectetur ac</li>
-            <li className='list-group-item'>Vestibulum at eros</li> */}
+            <li className='list-group-item'>Porta ac consectetur ac</li>
+            <li className='list-group-item'>Vestibulum at eros</li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </div>
   );
