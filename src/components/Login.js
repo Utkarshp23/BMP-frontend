@@ -50,7 +50,6 @@ function Login() {
           setMsg("Invalid username/password")
         }
         else {
-
           //Setting state in store
           var userid = obj.userid;
           var ucatid_fk = obj.ucatid_fk;
