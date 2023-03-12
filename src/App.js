@@ -19,7 +19,7 @@ import AddProperty from './components/owner/AddProperty';
 import OwnerProperties from './components/owner/OwnerProperties';
 import PropertyPage from './components/pages/PropertyPage';
 import UpdateProp from './components/owner/UpdateProp';
-import Wishlist from './components/customer/WishList';
+import Wishlist from './components/customer/Wishlist';
 
 function App() {
   return (
@@ -39,7 +39,7 @@ function App() {
             <Route exact path='/myproperties' element={<OwnerProperties />}></Route>
             <Route exact path='/propertypage' element={<PropertyPage />}></Route>
             <Route exact path='/updateprop' element={<UpdateProp />}></Route>
-            <Route exact path='/WishList' element={<Wishlist />}></Route>
+            <Route exact path='/mywishlist' element={<Wishlist />}></Route>
           </Routes>
         </div>
       </div>
