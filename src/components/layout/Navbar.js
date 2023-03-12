@@ -35,11 +35,11 @@ const Navbar = () => {
         ) : (
           (myState.userType === 1 && (
             <ul className='navbar-nav mr-auto'>
-              <li className='nav-item'>
+              {/* <li className='nav-item'>
                 <Link className='nav-link' to='/'>
                   Manage properties
                 </Link>
-              </li>
+              </li> */}
               <li className='nav-item'>
                 <Link className='nav-link' to='/'>
                   Validate Accounts
@@ -64,16 +64,16 @@ const Navbar = () => {
                   My properties
                 </Link>
               </li>
-              <li className='nav-item'>
+              {/* <li className='nav-item'>
                 <Link className='nav-link' to='/'>
                   Property Requests
                 </Link>
-              </li>
-              <li className='nav-item'>
+              </li> */}
+              {/* <li className='nav-item'>
                 <Link className='nav-link' to='/'>
                   My Deals
                 </Link>
-              </li>
+              </li> */}
               <li className='nav-item'>
                 <Link className='nav-link' to='/logout'>
                   Logout
@@ -84,13 +84,13 @@ const Navbar = () => {
           (myState.userType === 3 && (
             <ul className='navbar-nav mr-auto'>
               <li className='nav-item'>
-                <Link className='nav-link' to='/mywishlist'>
-                  Wishlist
+                <Link className='nav-link' to='/CustHomepage'>
+                  Home
                 </Link>
               </li>
               <li className='nav-item'>
-                <Link className='nav-link' to='/myrequest'>
-                  My Requests
+                <Link className='nav-link' to='/mywishlist'>
+                  Wishlist
                 </Link>
               </li>
               <li className='nav-item'>
