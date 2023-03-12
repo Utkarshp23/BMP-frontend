@@ -45,7 +45,8 @@ const PropertyPage = () => {
         // var temp = [];
         const fetchData = async (r) => {
           const response = await fetch(
-            `http://localhost:8080/getusername/${r.buyerid}`
+            // `http://localhost:8080/getusername/${r.buyerid}`
+            `http://localhost:8080/getuser/${r.buyerid}`
           );
           const newData = await response.json();
           setCusts((custs) => [...custs, newData]);
@@ -105,6 +106,27 @@ const PropertyPage = () => {
     e.preventDefault();
     navigate('/updateprop', { state: { index, property, fType, pType } });
   };
+
+  const handleAcceptRequest = (e, cust) => {
+    e.preventDefault();
+    var reqid = 0;
+    var curReq={};
+    requests.forEach((r) => {
+      if (r.buyerid == cust.userid) {
+        reqid = r.reqid;
+        curReq=r;
+      }
+    });
+    fetch(`http://localhost:8080/updatereq/${reqid}`)
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        navigate('/dealpage', { state: { cust, curReq } });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleRejectRequest = (e) => {};
 
   return (
     <div className='prop-page-container'>
@@ -166,16 +188,28 @@ const PropertyPage = () => {
               <li className='list-group-item'>
                 <div className='cust-name'>
                   <span>
-                    {v[0]} {v[1]}
+                    {v.fname} {v.lname}
                   </span>
                   {/* {console.log(v[0] + ' ' + v[1])} */}
                 </div>
                 <div className='req-btns'>
-                  <button type='button' class='btn btn-outline-success'>
+                  <button
+                    type='button'
+                    class='btn btn-outline-success'
+                    onClick={(e) => {
+                      handleAcceptRequest(e, v);
+                    }}
+                  >
                     <AiOutlineCheckCircle className='req-acc' size={20} />
                     Accept
                   </button>
-                  <button type='button' class='btn btn-outline-danger'>
+                  <button
+                    type='button'
+                    class='btn btn-outline-danger'
+                    onClick={(e) => {
+                      handleRejectRequest(e);
+                    }}
+                  >
                     <RxCrossCircled className='req-rej' size={20} />
                     Reject
                   </button>
