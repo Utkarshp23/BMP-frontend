@@ -50,7 +50,7 @@ function Login() {
           setMsg("Invalid username/password")
         }
         else {
-
+          //Setting state in store
           var userid = obj.userid;
           var pwd =obj.password;
           var ucatid_fk = obj.ucatid_fk;
@@ -59,7 +59,8 @@ function Login() {
 
 
           if (obj.ucatid_fk === 1) {
-            navigate("/AdminHomepage");
+            // navigate("/AdminHomepage");
+            navigate("/");
           }
           else if (obj.ucatid_fk === 2) {
             navigate("/OwnerHomepage");

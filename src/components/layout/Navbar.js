@@ -35,18 +35,18 @@ const Navbar = () => {
         ) : (
           (myState.userType === 1 && (
             <ul className='navbar-nav mr-auto'>
-              <li className='nav-item'>
+              {/* <li className='nav-item'>
                 <Link className='nav-link' to='/'>
                   Manage properties
                 </Link>
-              </li>
+              </li> */}
               <li className='nav-item'>
-                <Link className='nav-link' to='/'>
+                <Link className='nav-link' to='/uservalidate'>
                   Validate Accounts
                 </Link>
               </li>
               <li className='nav-item'>
-                <Link className='nav-link' to='/'>
+                <Link className='nav-link' to='/propertyvalidate'>
                   Validate Properties
                 </Link>
               </li>
@@ -64,16 +64,16 @@ const Navbar = () => {
                   My properties
                 </Link>
               </li>
-              <li className='nav-item'>
+              {/* <li className='nav-item'>
                 <Link className='nav-link' to='/'>
                   Property Requests
                 </Link>
-              </li>
-              <li className='nav-item'>
+              </li> */}
+              {/* <li className='nav-item'>
                 <Link className='nav-link' to='/'>
                   My Deals
                 </Link>
-              </li>
+              </li> */}
               <li className='nav-item'>
                 <Link className='nav-link' to='/logout'>
                   Logout
@@ -84,13 +84,13 @@ const Navbar = () => {
           (myState.userType === 3 && (
             <ul className='navbar-nav mr-auto'>
               <li className='nav-item'>
-                <Link className='nav-item' to='/wishlist'>
-                  Wishlist
+                <Link className='nav-link' to='/CustHomepage'>
+                  Home
                 </Link>
               </li>
               <li className='nav-item'>
-                <Link className='nav-item' to='/'>
-                  My Requests
+                <Link className='nav-link' to='/mywishlist'>
+                  Wishlist
                 </Link>
               </li>
               <li className='nav-item'>
