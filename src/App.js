@@ -20,6 +20,7 @@ import OwnerProperties from './components/owner/OwnerProperties';
 import PropertyPage from './components/pages/PropertyPage';
 import UpdateProp from './components/owner/UpdateProp';
 import Wishlist from './components/customer/Wishlist';
+import UserValidate from './components/admin/UserValidate';
 
 function App() {
   return (
@@ -40,6 +41,8 @@ function App() {
             <Route exact path='/propertypage' element={<PropertyPage />}></Route>
             <Route exact path='/updateprop' element={<UpdateProp />}></Route>
             <Route exact path='/mywishlist' element={<Wishlist />}></Route>
+            <Route exact path='/uservalidate' element={<UserValidate/>}></Route>
+            <Route exact path='/propertyvalidate' element={<AdminHomepage/>}></Route>
           </Routes>
         </div>
       </div>

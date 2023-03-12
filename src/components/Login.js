@@ -57,7 +57,8 @@ function Login() {
           reduxAction(login({ userid, ucatid_fk }))
 
           if (obj.ucatid_fk === 1) {
-            navigate("/AdminHomepage");
+            // navigate("/AdminHomepage");
+            navigate("/");
           }
           else if (obj.ucatid_fk === 2) {
             navigate("/OwnerHomepage");

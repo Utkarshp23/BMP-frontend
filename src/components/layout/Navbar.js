@@ -35,18 +35,18 @@ const Navbar = () => {
         ) : (
           (myState.userType === 1 && (
             <ul className='navbar-nav mr-auto'>
-              <li className='nav-item'>
+              {/* <li className='nav-item'>
                 <Link className='nav-link' to='/'>
                   Manage properties
                 </Link>
-              </li>
+              </li> */}
               <li className='nav-item'>
-                <Link className='nav-link' to='/'>
+                <Link className='nav-link' to='/uservalidate'>
                   Validate Accounts
                 </Link>
               </li>
               <li className='nav-item'>
-                <Link className='nav-link' to='/'>
+                <Link className='nav-link' to='/propertyvalidate'>
                   Validate Properties
                 </Link>
               </li>
