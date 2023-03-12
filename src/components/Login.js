@@ -51,10 +51,12 @@ function Login() {
         }
         else {
 
-          //Setting state in store
           var userid = obj.userid;
+          var pwd =obj.password;
           var ucatid_fk = obj.ucatid_fk;
           reduxAction(login({ userid, ucatid_fk }))
+
+
 
           if (obj.ucatid_fk === 1) {
             navigate("/AdminHomepage");
@@ -69,6 +71,11 @@ function Login() {
       })
       .catch((error) => alert("Server error..."))
   };
+
+  
+
+  
+
   return (
     <div className="form-container">
       <div className="login-form">

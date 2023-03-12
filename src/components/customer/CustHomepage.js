@@ -154,7 +154,7 @@ export default function CustHomepage() {
                                                     }
 
                                                     <div>
-                                                        {isRequestSent ? (
+                                                        {isRequestSent ?    (
                                                             <p>Request Sent</p>
                                                         ) : (
 
