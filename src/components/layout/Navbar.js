@@ -13,7 +13,7 @@ const Navbar = () => {
 
   return (
     <nav className='nav_container navbar navbar-expand-lg navbar-light bg-light shadow-sm p-3 mb-5 bg-white rounded'>
-      <Link className='navbar-brand' to='/'>
+      <Link className='navbar-brand' to='/home'>
         <BsBuilding />
         <h5>Book My Property</h5>
       </Link>
@@ -61,7 +61,7 @@ const Navbar = () => {
             <ul className='navbar-nav mr-auto'>
               <li className='nav-item'>
                 <Link className='nav-link' to='/myproperties'>
-                  My properties
+                  My Dashboard
                 </Link>
               </li>
               {/* <li className='nav-item'>
@@ -85,7 +85,7 @@ const Navbar = () => {
             <ul className='navbar-nav mr-auto'>
               <li className='nav-item'>
                 <Link className='nav-link' to='/CustHomepage'>
-                  Home
+                  My Dashboard
                 </Link>
               </li>
               <li className='nav-item'>

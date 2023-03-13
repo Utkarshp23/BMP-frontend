@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import Navbar from './components/layout/Navbar';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import Home from './components/Home';
+import Home from './components/guestuser/Home';
 import CustHomepage from './components/customer/CustHomepage';
 import OwnerHomepage from './components/owner/OwnerHomepage';
 import AdminHomepage from './components/admin/AdminHomepage';
@@ -20,19 +20,22 @@ import OwnerProperties from './components/owner/OwnerProperties';
 import PropertyPage from './components/pages/PropertyPage';
 import UpdateProp from './components/owner/UpdateProp';
 import Wishlist from './components/customer/Wishlist';
-
 import UserValidate from './components/admin/UserValidate';
-
 import DealPage from './components/pages/DealPage';
+import { useLocation } from 'react-router-dom';
+import ContactPage from './components/customer/ContactPage';
+// import { redirect } from 'react-router-dom';
 
 function App() {
   const myState = useSelector((state) => state.logged);
+  // const location = useLocation();
   return (
     <Router>
       <div className='App'>
         <Navbar />
         <div className='container'>
-          {/* {myState.loggedIn === false && <CustHomepage />} */}
+          {/* {console.log(location.pathname)} */}
+          {/* {myState.loggedIn === false && <Home />} */}
           <Routes>
             <Route exact path='/login' element={<Login />}></Route>
             <Route exact path='/signup' element={<Signup />}></Route>
@@ -75,8 +78,14 @@ function App() {
               path='/propertyvalidate'
               element={<AdminHomepage />}
             ></Route>
-
             <Route exact path='/dealpage' element={<DealPage />}></Route>
+            <Route exact path='/home' element={<Home />}></Route>
+            <Route exact path='/' element={<Home />}></Route>
+            <Route
+              exact
+              path='/getownercontact'
+              element={<ContactPage />}
+            ></Route>
           </Routes>
         </div>
       </div>

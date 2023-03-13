@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../layout/PropItem.scss';
 import { HiOutlineCurrencyRupee } from 'react-icons/hi';
+import { FaUserFriends } from 'react-icons/fa';
 import { BiCart } from 'react-icons/bi';
 import { GoHome } from 'react-icons/go';
 import { MdOutlineSell } from 'react-icons/md';
@@ -14,9 +15,10 @@ const CustPropItem = ({ index, myreq, wishlist, property, fType, pType }) => {
 
   const [reqStatusText, setReqStatusText] = useState('');
   const [wishStatusText, setWishStatusText] = useState('');
+  const [ownerid, setOwnerid] = useState();
 
   useEffect(() => {
-    console.log(myreq);
+    // console.log(myreq);
     // console.log(property);
     var n = myreq.length;
     if (n == 0) {
@@ -26,6 +28,7 @@ const CustPropItem = ({ index, myreq, wishlist, property, fType, pType }) => {
       for (let v of myreq) {
         if (v.propid == property.pid) {
           setReqStatusText(v.status);
+          setOwnerid(v.ownerid);
           flg = true;
           break;
         }
@@ -54,9 +57,7 @@ const CustPropItem = ({ index, myreq, wishlist, property, fType, pType }) => {
         setWishStatusText('Save');
       }
     }
-  }, []);
-
-  useEffect(() => {}, []);
+  }, [index, myreq, wishlist, property, fType, pType]);
 
   var sendReq = (e) => {
     e.preventDefault();
@@ -107,6 +108,17 @@ const CustPropItem = ({ index, myreq, wishlist, property, fType, pType }) => {
       .catch((err) => console.log(err));
   };
 
+  const getOwnerDetails = (e) => {
+    // var ownerid = myreq.ownerid;
+    fetch(`http://localhost:8080/getuser/${ownerid}`)
+      .then((res) => res.json())
+      .then((owner) => {
+        console.log(owner);
+        navigate('/getownercontact', { state: { owner } });
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className='prop-container'>
       <div className='prop-number'>
@@ -134,11 +146,15 @@ const CustPropItem = ({ index, myreq, wishlist, property, fType, pType }) => {
       <div className='prop-details-button'>
         <button
           style={{ fontSize: 13 }}
+          disabled={
+            (reqStatusText === 'Pending' && true) ||
+            (reqStatusText === 'Accepted' && true)
+          }
           onClick={(e) => {
             sendReq(e);
           }}
-          disabled={reqStatusText === 'Pending' ? true : false}
         >
+          <FaUserFriends />
           {reqStatusText}
         </button>
         <button
@@ -152,6 +168,17 @@ const CustPropItem = ({ index, myreq, wishlist, property, fType, pType }) => {
           {wishStatusText}
         </button>
       </div>
+      {reqStatusText === 'Accepted' && (
+        <div className='prop-details-button'>
+          <button
+            onClick={(e) => {
+              getOwnerDetails(e);
+            }}
+          >
+            Contact Owner
+          </button>
+        </div>
+      )}
     </div>
   );
 };

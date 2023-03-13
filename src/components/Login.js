@@ -56,7 +56,8 @@ function Login() {
             // navigate("/AdminHomepage");
             navigate('/');
           } else if (obj.ucatid_fk === 2) {
-            navigate('/OwnerHomepage');
+            // navigate('/OwnerHomepage');
+            navigate('/myproperties');
           } else if (obj.ucatid_fk === 3) {
             navigate('/CustHomepage');
           }

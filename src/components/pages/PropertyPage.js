@@ -110,11 +110,11 @@ const PropertyPage = () => {
   const handleAcceptRequest = (e, cust) => {
     e.preventDefault();
     var reqid = 0;
-    var curReq={};
+    var curReq = {};
     requests.forEach((r) => {
       if (r.buyerid == cust.userid) {
         reqid = r.reqid;
-        curReq=r;
+        curReq = r;
       }
     });
     fetch(`http://localhost:8080/updatereq/${reqid}`)
@@ -163,8 +163,8 @@ const PropertyPage = () => {
         <div className='prop-ptyp-status'>
           <span className='badge text-bg-primary'>{location.state.pType}</span>
           <span className='badge text-bg-warning'>
-            {/* {location.state.property.status} */}
-            Not Dealed
+            {location.state.property.s_status}
+            {/* Not Dealed */}
           </span>
         </div>
         <div className='prop-address'>
@@ -179,51 +179,47 @@ const PropertyPage = () => {
           <GoHome size={30} />
           <span>{location.state.fType}</span>
         </div>
-        <div className='prop-requests'>
-          <button type='button' class='btn btn-dark'>
-            Request <span class='badge badge-dark'>{custs.length}</span>
-          </button>
-          <ul className='list-group'>
-            {custs.map((v) => (
-              <li className='list-group-item'>
-                <div className='cust-name'>
-                  <span>
-                    {v.fname} {v.lname}
-                  </span>
-                  {/* {console.log(v[0] + ' ' + v[1])} */}
-                </div>
-                <div className='req-btns'>
-                  <button
-                    type='button'
-                    class='btn btn-outline-success'
-                    onClick={(e) => {
-                      handleAcceptRequest(e, v);
-                    }}
-                  >
-                    <AiOutlineCheckCircle className='req-acc' size={20} />
-                    Accept
-                  </button>
-                  <button
-                    type='button'
-                    class='btn btn-outline-danger'
-                    onClick={(e) => {
-                      handleRejectRequest(e);
-                    }}
-                  >
-                    <RxCrossCircled className='req-rej' size={20} />
-                    Reject
-                  </button>
-                </div>
-              </li>
-            ))}
-            {/* {console.log(custs.length)} */}
-
-            {/* <li className='list-group-item'>Dapibus ac facilisis in</li> */}
-            {/* <li className='list-group-item'>Morbi leo risus</li>
-            <li className='list-group-item'>Porta ac consectetur ac</li>
-            <li className='list-group-item'>Vestibulum at eros</li> */}
-          </ul>
-        </div>
+        {property.s_status === 'Not Dealed' && (
+          <div className='prop-requests'>
+            <button type='button' class='btn btn-dark'>
+              Request <span class='badge badge-dark'>{custs.length}</span>
+            </button>
+            <ul className='list-group'>
+              {custs.map((v) => (
+                <li className='list-group-item'>
+                  <div className='cust-name'>
+                    <span>
+                      {v.fname} {v.lname}
+                    </span>
+                    {/* {console.log(v[0] + ' ' + v[1])} */}
+                  </div>
+                  <div className='req-btns'>
+                    <button
+                      type='button'
+                      class='btn btn-outline-success'
+                      onClick={(e) => {
+                        handleAcceptRequest(e, v);
+                      }}
+                    >
+                      <AiOutlineCheckCircle className='req-acc' size={20} />
+                      Accept
+                    </button>
+                    <button
+                      type='button'
+                      class='btn btn-outline-danger'
+                      onClick={(e) => {
+                        handleRejectRequest(e);
+                      }}
+                    >
+                      <RxCrossCircled className='req-rej' size={20} />
+                      Reject
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {/* <div className='prop-feedbacks'>
           <button
