@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function OwnerHomepage() {
   const navigate = useNavigate();
@@ -19,5 +19,5 @@ export default function OwnerHomepage() {
       <input type="button" value="Show Properties"
         onClick={navigateshowproperty} /> */}
     </div>
-  )
+  );
 }
