@@ -20,7 +20,7 @@ import AddProperty from './components/owner/AddProperty';
 import OwnerProperties from './components/owner/OwnerProperties';
 import PropertyPage from './components/pages/PropertyPage';
 import UpdateProp from './components/owner/UpdateProp';
-import Wishlist from './components/customer/Wishlist';
+import Wishlist from './components/customer/WishList';
 
 import UserValidate from './components/admin/UserValidate';
 
