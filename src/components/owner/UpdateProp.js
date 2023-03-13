@@ -90,7 +90,7 @@ export default function UpdateProp() {
     e.preventDefault();
     property.pid = oldProp.pid;
     property.userid = oldProp.userid;
-    
+
     keyNames.forEach((v) => {
       if (v === 'address') {
         var keyNames2 = Object.keys(property.address);
