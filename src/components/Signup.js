@@ -33,12 +33,12 @@ export default function Signup() {
     lname: { value: "", valid: false, touched: false, error: "" },
     email: { value: "", valid: false, touched: false, error: "" },
     contact: { value: "", valid: false, touched: false, error: "" },
-    ucatid_fk: { value: "", valid: false, touched: false, error: "" },
+    // ucatid_fk: { value: "", valid: false, touched: false, error: "" },
     addline1: { value: "", valid: false, touched: false, error: "" },
     state:{ value: "", valid: false, touched: false, error: "" },
     city: { value: "", valid: false, touched: false, error: "" },
     pincode: { value: "", valid: false, touched: false, error: "" },
-    qid_fk: { value: "", valid: false, touched: false, error: "" },
+    // qid_fk: { value: "", valid: false, touched: false, error: "" },
     ans: { value: "", valid: false, touched: false, error: "" },
 
   }
@@ -124,7 +124,6 @@ export default function Signup() {
       case 'email':
         var re4 = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
         if (!re4.test(value)) {
-  
           error = "Enter valid Email"
         }
         else
@@ -136,7 +135,6 @@ export default function Signup() {
       case 'contact':
         var re5 = /^[0-9]{10}$/;
         if (!re5.test(value)) {
-        
           error = "Enter valid number"
         }
         else
@@ -145,18 +143,18 @@ export default function Signup() {
           error=""
         }
         break;
-        case 'ucatid_fk':
-          var re6 = /^[A-Za-z]{1,20}$/;
-          if (!re6.test(value)) {
+        // case 'ucatid_fk':
+        //   var re6 = /^[A-Za-z]{1,20}$/;
+        //   if (!re6.test(value)) {
          
-            error = "Select Type";
-          }
-          else
-          {
-            valid = true;
-            error=""
-          }
-          break;
+        //     error = "Select Type";
+        //   }
+        //   else
+        //   {
+        //     valid = true;
+        //     error=""
+        //   }
+        //   break;
       case 'addline1':
         var re7 = /^[a-zA-Z0-9\s\.,#'-]{3,100}$/ 
         if (!re7.test(value)) {
@@ -168,7 +166,7 @@ export default function Signup() {
           valid = true;
           error=""
         }
-        break;
+        break;                                                                                                                                                                                                              
         case 'state':
           var re8 = /^[A-Za-z]{1,20}$/;
           if (!re8.test(value)) {
@@ -206,18 +204,18 @@ export default function Signup() {
         }
         break;
       
-        case 'qid_fk':
-          var re11 = /^$/;
-          if (!re11.test(value)) {
+        // case 'qid_fk':
+        //   var re11 = /^$/;
+        //   if (!re11.test(value)) {
          
-            error = "Select question";
-          }
-          else
-          {
-            valid = true;
-            error=""
-          }
-          break;
+        //     error = "Select question";
+        //   }
+        //   else
+        //   {
+        //     valid = true;
+        //     error=""
+        //   }
+        //   break;
       case 'ans':
         var re12 = /^[A-Z]{1}[a-z]{2,15}$/;
         if (!re12.test(value)) {
@@ -268,6 +266,7 @@ export default function Signup() {
  
   var register = (e) => {
     e.preventDefault();
+    // console.log(info);
     // console.log(`ucatid_fk:${user.ucatid_fk}`);
     const options = {
       method: 'POST',
@@ -433,7 +432,7 @@ export default function Signup() {
             name='ucatid_fk'
             id='usertype'
             required={true}
-            value={info.ucatid_fk.value}
+            // value={info.ucatid_fk.value}
             onChange={(e) => {
               { validate("ucatid_fk", e.target.value) }
               dispatch({
@@ -446,7 +445,7 @@ export default function Signup() {
             <option defaultValue={''}>Choose...</option>
           </select>
         </div>
-        <p style={{ display: info.ucatid_fk.touched && info.ucatid_fk.valid ? "block" : "none", color: "red" }}> {info.ucatid_fk.error} </p>
+        {/* <p style={{ display: info.ucatid_fk.touched && info.ucatid_fk.valid ? "block" : "none", color: "red" }}> {info.ucatid_fk.error} </p> */}
         <div className='mb-3'>
           <label htmlFor='inputAddress'>Address1</label>
           <input
@@ -592,7 +591,7 @@ export default function Signup() {
           <select
             name='qid_fk'
             id='secque'
-            value={info.qid_fk.value}
+            // value={info.qid_fk.value}
             className='form-control form-control-sm'
             required={true}
             onChange={(e) => {
@@ -607,7 +606,7 @@ export default function Signup() {
             <option defaultValue={''}>Choose...</option>
           </select>
         </div>
-        <p style={{ display: info.qid_fk.touched && info.qid_fk.valid ? "block" : "none", color: "red" }}> {info.qid_fk.error} </p>
+        {/* <p style={{ display: info.qid_fk.touched && info.qid_fk.valid ? "block" : "none", color: "red" }}> {info.qid_fk.error} </p> */}
         <div className='mb-3 form-row'>
           <input
             type='text'
@@ -632,7 +631,7 @@ export default function Signup() {
           type='submit'
           className='btn btn-primary'
           // disabled={info.isFormValid?false:true}
-          disabled={info.username.valid && info.password.valid && info.fname.valid && info.lname.valid && info.email.valid && info.contact.valid && info.ucatid_fk.valid && info.addline1.valid && info.state.valid && info.city.valid && info.pincode.valid && info.qid_fk.valid && info.ans.valid ? false : true}
+          disabled={info.username.valid && info.password.valid && info.fname.valid && info.lname.valid && info.email.valid && info.contact.valid  && info.addline1.valid && info.state.valid && info.city.valid && info.pincode.valid  && info.ans.valid ? false : true}
           onClick={(e) => {
             register(e);
           }}
