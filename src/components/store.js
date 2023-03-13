@@ -1,8 +1,8 @@
-import {configureStore} from '@reduxjs/toolkit'
-import loggedReducer from './slice'
+import { configureStore } from '@reduxjs/toolkit';
+import loggedReducer from './slice';
 
 export default configureStore({
-      reducer:{
-        logged: loggedReducer
-      }
-})
+  reducer: {
+    logged: loggedReducer,
+  },
+});
