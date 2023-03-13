@@ -2,14 +2,13 @@ import React, { useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loggedSlice, login } from './slice';
 import { useDispatch } from 'react-redux';
-import "./style.css";
+import './style.css';
 import store from './store';
 
 function Login() {
-
   const init = {
     username: '',
-    password: ''
+    password: '',
   };
 
   var reducer = (state, action) => {
@@ -20,7 +19,7 @@ function Login() {
   };
 
   const [user, dispatch] = useReducer(reducer, init);
-  const [msg, setMsg] = useState("");
+  const [msg, setMsg] = useState('');
 
   const navigate = useNavigate();
   const reduxAction = useDispatch();
@@ -39,38 +38,34 @@ function Login() {
       .then((res) => {
         if (res.ok) {
           return res.text();
-        }
-        else {
-          throw new Error("server Error")
+        } else {
+          throw new Error('server Error');
         }
       })
-      .then(text => text.length ? JSON.parse(text) : {})
-      .then(obj => {
+      .then((text) => (text.length ? JSON.parse(text) : {}))
+      .then((obj) => {
         if (Object.keys(obj).length === 0) {
-          setMsg("Invalid username/password")
-        }
-        else {
+          setMsg('Invalid username/password');
+        } else {
           //Setting state in store
           var userid = obj.userid;
           var pwd =obj.password;
           var ucatid_fk = obj.ucatid_fk;
-          reduxAction(login({ userid, ucatid_fk }))
+          reduxAction(login({ userid, ucatid_fk }));
 
 
 
           if (obj.ucatid_fk === 1) {
             // navigate("/AdminHomepage");
-            navigate("/");
-          }
-          else if (obj.ucatid_fk === 2) {
-            navigate("/OwnerHomepage");
-          }
-          else if (obj.ucatid_fk === 3) {
-            navigate("/CustHomepage");
+            navigate('/');
+          } else if (obj.ucatid_fk === 2) {
+            navigate('/OwnerHomepage');
+          } else if (obj.ucatid_fk === 3) {
+            navigate('/CustHomepage');
           }
         }
       })
-      .catch((error) => alert("Server error..."))
+      .catch((error) => alert('Server error...'));
   };
 
   
@@ -78,44 +73,57 @@ function Login() {
   
 
   return (
-    <div className="form-container">
-      <div className="login-form">
-        <div className="form">
+    <div className='form-container'>
+      <div className='login-form'>
+        <div className='form'>
           <form>
             <div className='mb-3'>
               <h4>Login</h4>
             </div>
-            <div className="input-container">
-              <input type="text" name="username" value={user.username} required placeholder="Username"
+            <div className='input-container'>
+              <input
+                type='text'
+                name='username'
+                value={user.username}
+                required
+                placeholder='Username'
                 onChange={(u) => {
                   dispatch({
                     type: 'logincheck',
                     field: u.target.name,
                     val: u.target.value,
                   });
-                }} />
+                }}
+              />
             </div>
-            <div className="input-container">
-              <input type="password" name="password" value={user.password} required placeholder="Password"
+            <div className='input-container'>
+              <input
+                type='password'
+                name='password'
+                value={user.password}
+                required
+                placeholder='Password'
                 onChange={(u) => {
                   dispatch({
                     type: 'logincheck',
                     field: u.target.name,
                     val: u.target.value,
                   });
-                }} />
+                }}
+              />
             </div>
-            <div className="button-container">
-              <input type="submit"
+            <div className='button-container'>
+              <input
+                type='submit'
                 onClick={(u) => {
                   logincheck(u);
-                }} />
+                }}
+              />
             </div>
           </form>
           <p>{msg}</p>
         </div>
       </div>
-
     </div>
   );
 }
