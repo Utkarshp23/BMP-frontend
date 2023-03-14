@@ -8,10 +8,7 @@ const Logout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   dispatch(logout());
-  navigate('/');
-  // return (
-  //   <div>Logout</div>
-  // )
+  navigate('/home');
 };
 
 export default Logout;

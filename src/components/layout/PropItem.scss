@@ -1,6 +1,6 @@
 .prop-container{
     width: 20vw;
-    height: 50vh;
+    height: 60vh;
     background-color: white;
     padding: 3rem;
     border-radius: 30px;
@@ -79,7 +79,15 @@
       button:hover{
         background-color: black;
         color: white;
-    }
+      }
+      button:disabled,
+      button[disabled]{
+        cursor: none;
+        border-color: green;
+        color: green;
+        background-color: white;
+      }
+
     }
 
 

@@ -52,6 +52,7 @@ export default function AddProperty() {
       city: '',
       pincode: '',
     },
+    s_status:'Not dealed'
   };
 
   var reducer = (state, action) => {
