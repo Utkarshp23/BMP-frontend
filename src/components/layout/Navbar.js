@@ -7,9 +7,9 @@ import { logout } from '../slice';
 
 const Navbar = () => {
   const myState = useSelector((state) => state.logged);
-  console.log(
-    myState.loggedIn + '//' + myState.userId + '//' + myState.userType
-  );
+  // console.log(
+  //   myState.loggedIn + '//' + myState.userId + '//' + myState.userType
+  // );
 
   return (
     <nav className='nav_container navbar navbar-expand-lg navbar-light bg-light shadow-sm p-3 mb-5 bg-white rounded'>

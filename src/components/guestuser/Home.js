@@ -19,7 +19,7 @@ export default function CustHomepage() {
   // };
   var checksearch = (s) => {
     s.preventDefault();
-    fetch(`http://localhost:8080/search/${search}`)
+    fetch(`${window.$restUrl}/search/${search}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -35,7 +35,8 @@ export default function CustHomepage() {
   };
 
   useEffect(() => {
-    fetch('http://localhost:8080/getproperty')
+    console.log(window.$restUrl);
+    fetch(`${window.$restUrl}/getproperty`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -49,7 +50,7 @@ export default function CustHomepage() {
       })
       .catch((Error) => alert('server problem ! sever is down'));
 
-    fetch('http://localhost:8080/getflattype')
+    fetch(`${window.$restUrl}/getflattype`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -63,7 +64,7 @@ export default function CustHomepage() {
       })
       .catch((Error) => alert('server problem ! sever is down1'));
 
-    fetch('http://localhost:8080/getproptype')
+    fetch(`${window.$restUrl}/getproptype`)
       .then((res) => {
         if (res.ok) {
           return res.json();

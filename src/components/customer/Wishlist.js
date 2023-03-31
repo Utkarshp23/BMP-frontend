@@ -17,7 +17,7 @@ export default function Wishlist() {
 
   var handleRemoveWish = (e, id) => {
     e.preventDefault();
-    fetch(`http://localhost:8080/deletewish/${id}`)
+    fetch(`${window.$restUrl}/deletewish/${id}`)
       .then((res) => {
         if (res.ok) {
           navigate('/mywishlist');
@@ -28,7 +28,7 @@ export default function Wishlist() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:8080/getmywishlist/${myState.userId}`)
+    fetch(`${window.$restUrl}/getmywishlist/${myState.userId}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -37,7 +37,7 @@ export default function Wishlist() {
         }
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setwishlist(res);
       });
   }, []);

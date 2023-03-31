@@ -22,10 +22,10 @@ export default function UpdateProp() {
     var ftype = document.getElementById('flattype');
     var ptype = document.getElementById('propertytype');
 
-    fetch('http://localhost:8080/getflattype')
+    fetch(`${window.$restUrl}/getflattype`)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        // console.log(res);
 
         res.map((v) => {
           var opt = document.createElement('option');
@@ -35,10 +35,10 @@ export default function UpdateProp() {
         });
       });
 
-    fetch('http://localhost:8080/getproptype')
+    fetch(`${window.$restUrl}/getproptype`)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         res.map((p) => {
           var opt1 = document.createElement('option');
           opt1.value = p.ptypeid;
@@ -106,7 +106,7 @@ export default function UpdateProp() {
       }
     });
 
-    console.log(property);
+    // console.log(property);
     const options = {
       method: 'POST',
       headers: {
@@ -114,7 +114,7 @@ export default function UpdateProp() {
       },
       body: JSON.stringify(property),
     };
-    fetch('http://localhost:8080/addproperty', options)
+    fetch(`${window.$restUrl}/addproperty`, options)
       .then((res) => {
         if (res.ok) {
           navigate('/myproperties');

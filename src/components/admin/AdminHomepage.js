@@ -16,7 +16,7 @@ export default function AdminHomepage() {
   };
   var checksearch = (s) => {
     s.preventDefault();
-    fetch(`http://localhost:8080/search/${search}`)
+    fetch(`${window.$restUrl}/search/${search}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -25,7 +25,7 @@ export default function AdminHomepage() {
         }
       })
       .then((obj) => {
-        console.log(obj);
+        // console.log(obj);
         setownersproperty(obj);
       })
       .catch((Error) => alert('server problem ! sever is down'));
@@ -33,21 +33,21 @@ export default function AdminHomepage() {
 
   var handleValidate = (e, id) => {
     e.preventDefault();
-    fetch(`http://localhost:8080/validateproperty/${id}`)
+    fetch(`${window.$restUrl}/validateproperty/${id}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
         }
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         navigate('/adminhomepage');
       })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    fetch('http://localhost:8080/getproperty')
+    fetch(`${window.$restUrl}/getproperty`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -57,12 +57,12 @@ export default function AdminHomepage() {
       })
       .then((obj) => {
         //    if(obj.pid===)
-        console.log(obj);
+        // console.log(obj);
         setownersproperty(obj);
       })
       .catch((Error) => alert('server problem ! sever is down'));
 
-    fetch('http://localhost:8080/getflattype')
+    fetch(`${window.$restUrl}/getflattype`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -71,12 +71,12 @@ export default function AdminHomepage() {
         }
       })
       .then((obj) => {
-        console.log(obj);
+        // console.log(obj);
         setflattype(obj);
       })
       .catch((Error) => alert('server problem ! sever is down1'));
 
-    fetch('http://localhost:8080/getproptype')
+    fetch(`${window.$restUrl}/getproptype`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -85,7 +85,7 @@ export default function AdminHomepage() {
         }
       })
       .then((obj) => {
-        console.log(obj);
+        // console.log(obj);
         setproptype(obj);
       })
       .catch((Error) => alert('server problem ! sever is down2'));

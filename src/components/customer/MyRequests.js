@@ -25,7 +25,7 @@ export default function MyRequests() {
     //   },
     //   body: JSON.stringify(wishlist),
     // };
-    fetch(`http://localhost:8080/deletewish/${id}`)
+    fetch(`${window.$restUrl}/deletewish/${id}`)
       .then((res) => {
         if (res.ok) {
           //navigate('/');
@@ -36,7 +36,7 @@ export default function MyRequests() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:8080/getmyrequest/${myState.userId}`)
+    fetch(`${window.$restUrl}/getmyrequest/${myState.userId}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -45,7 +45,7 @@ export default function MyRequests() {
         }
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setwishlist(res);
       });
   }, []);

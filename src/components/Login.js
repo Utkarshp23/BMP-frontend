@@ -33,8 +33,8 @@ function Login() {
       },
       body: JSON.stringify(user),
     };
-
-    fetch('http://localhost:8080/logincheck', options)
+    // console.log(window.$restUrl);
+    fetch(`${window.$restUrl}/logincheck`, options)
       .then((res) => {
         if (res.ok) {
           return res.text();

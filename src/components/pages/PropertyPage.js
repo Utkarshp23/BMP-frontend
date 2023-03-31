@@ -30,7 +30,7 @@ const PropertyPage = () => {
     //   fetch(`http://localhost:8080/getpropreq/${property.pid}`),
     //   fetch(`http://localhost:8080/getpropreq/${property.pid}`)
     // ])
-    fetch(`http://localhost:8080/getpropreq/${property.pid}`)
+    fetch(`${window.$restUrl}/getpropreq/${property.pid}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -46,7 +46,7 @@ const PropertyPage = () => {
         const fetchData = async (r) => {
           const response = await fetch(
             // `http://localhost:8080/getusername/${r.buyerid}`
-            `http://localhost:8080/getuser/${r.buyerid}`
+            `${window.$restUrl}/getuser/${r.buyerid}`
           );
           const newData = await response.json();
           setCusts((custs) => [...custs, newData]);
@@ -95,10 +95,10 @@ const PropertyPage = () => {
       },
       body: JSON.stringify(property),
     };
-    fetch('http://localhost:8080/deleteproperty', options)
+    fetch(`${window.$restUrl}/deleteproperty`, options)
       .then((res) => res.json)
       .then((msg) => {
-        console.log(msg);
+        // console.log(msg);
         navigate('/myproperties');
       });
   };
@@ -117,10 +117,10 @@ const PropertyPage = () => {
         curReq = r;
       }
     });
-    fetch(`http://localhost:8080/updatereq/${reqid}`)
+    fetch(`${window.$restUrl}/updatereq/${reqid}`)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         navigate('/dealpage', { state: { cust, curReq } });
       })
       .catch((err) => console.log(err));

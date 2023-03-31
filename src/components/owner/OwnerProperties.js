@@ -13,7 +13,7 @@ export default function OwnerProperties() {
   const myState = useSelector((state) => state.logged);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/getpropertybyid/${myState.userId}`)
+    fetch(`${window.$restUrl}/getpropertybyid/${myState.userId}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -22,12 +22,12 @@ export default function OwnerProperties() {
         }
       })
       .then((obj) => {
-        console.log(obj);
+        // console.log(obj);
         setProperties(obj);
       })
       .catch((Error) => alert('server problem ! sever is down'));
 
-    fetch('http://localhost:8080/getflattype')
+    fetch(`${window.$restUrl}/getflattype`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -36,12 +36,12 @@ export default function OwnerProperties() {
         }
       })
       .then((obj) => {
-        console.log(obj);
+        // console.log(obj);
         setFTypes(obj);
       })
       .catch((Error) => alert('server problem ! sever is down'));
 
-    fetch('http://localhost:8080/getproptype')
+    fetch(`${window.$restUrl}/getproptype`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -50,7 +50,7 @@ export default function OwnerProperties() {
         }
       })
       .then((obj) => {
-        console.log(obj);
+        // console.log(obj);
         setPTypes(obj);
       })
       .catch((Error) => alert('server problem ! sever is down2'));

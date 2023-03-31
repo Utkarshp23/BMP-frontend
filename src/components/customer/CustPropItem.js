@@ -39,7 +39,7 @@ const CustPropItem = ({ index, myreq, wishlist, property, fType, pType }) => {
     }
 
     //
-    console.log(wishlist);
+    // console.log(wishlist);
     // console.log(property);
     var wishLength = wishlist.length;
     if (wishLength == 0) {
@@ -75,11 +75,11 @@ const CustPropItem = ({ index, myreq, wishlist, property, fType, pType }) => {
       },
       body: JSON.stringify(req),
     };
-    fetch('http://localhost:8080/sendrequest', options)
+    fetch(`${window.$restUrl}/sendrequest`, options)
       .then((res) => {
         if (res.ok) {
           setReqStatusText('Pending');
-          console.log('Requeste sent Succesful...');
+          // console.log('Requeste sent Succesful...');
         }
       })
       .catch((err) => console.log(err));
@@ -98,11 +98,11 @@ const CustPropItem = ({ index, myreq, wishlist, property, fType, pType }) => {
       },
       body: JSON.stringify(newWishItem),
     };
-    fetch('http://localhost:8080/addtowishlist', options)
+    fetch(`${window.$restUrl}/addtowishlist`, options)
       .then((res) => {
         if (res.ok) {
           setWishStatusText('Saved');
-          console.log('Added to wishlist...');
+          // console.log('Added to wishlist...');
         }
       })
       .catch((err) => console.log(err));
@@ -110,10 +110,10 @@ const CustPropItem = ({ index, myreq, wishlist, property, fType, pType }) => {
 
   const getOwnerDetails = (e) => {
     // var ownerid = myreq.ownerid;
-    fetch(`http://localhost:8080/getuser/${ownerid}`)
+    fetch(`${window.$restUrl}/getuser/${ownerid}`)
       .then((res) => res.json())
       .then((owner) => {
-        console.log(owner);
+        // console.log(owner);
         navigate('/getownercontact', { state: { owner } });
       })
       .catch((err) => console.log(err));

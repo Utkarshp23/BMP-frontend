@@ -203,7 +203,7 @@ export default function Signup() {
     var userSel = document.getElementById('usertype');
     var queSel = document.getElementById('secque');
 
-    fetch('http://localhost:8080/getusertypes')
+    fetch(`${window.$restUrl}/getusertypes`)
       .then((res) => res.json())
       .then((res) => {
         // console.log(res);
@@ -215,7 +215,7 @@ export default function Signup() {
         });
       });
 
-    fetch('http://localhost:8080/getsecque')
+    fetch(`${window.$restUrl}/getsecque`)
       .then((res) => res.json())
       .then((res) => {
         res.map((q) => {
@@ -238,7 +238,7 @@ export default function Signup() {
       },
       body: JSON.stringify(user),
     };
-    fetch('http://localhost:8080/signup', options)
+    fetch(`${window.$restUrl}/signup`, options)
       .then((res) => {
         if (res.ok) {
           navigate('/login');
@@ -739,16 +739,16 @@ export default function Signup() {
           // disabled={info.isFormValid?false:true}
           disabled={
             info.username.valid &&
-            info.password.valid &&
-            info.fname.valid &&
-            info.lname.valid &&
-            info.email.valid &&
-            info.contact.valid &&
-            info.addline1.valid &&
-            info.state.valid &&
-            info.city.valid &&
-            info.pincode.valid &&
-            info.ans.valid
+              info.password.valid &&
+              info.fname.valid &&
+              info.lname.valid &&
+              info.email.valid &&
+              info.contact.valid &&
+              info.addline1.valid &&
+              info.state.valid &&
+              info.city.valid &&
+              info.pincode.valid &&
+              info.ans.valid
               ? false
               : true
           }

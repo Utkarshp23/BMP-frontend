@@ -8,7 +8,7 @@ export default function UserValidate() {
 
   var handleValidate = (e, id) => {
     e.preventDefault();
-    fetch(`http://localhost:8080/validateuser/${id}`)
+    fetch(`${window.$restUrl}/validateuser/${id}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -22,7 +22,7 @@ export default function UserValidate() {
   };
 
   useEffect(() => {
-    fetch('http://localhost:8080/getallusers')
+    fetch(`${window.$restUrl}/getallusers`)
       .then((res) => {
         if (res.ok) {
           return res.json();

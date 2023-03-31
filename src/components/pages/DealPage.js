@@ -7,17 +7,17 @@ const DealPage = () => {
   const location = useLocation();
   var customer = location.state.cust;
   var curReq = location.state.curReq;
-  var navigate=useNavigate();
+  var navigate = useNavigate();
 
-  const handleConfirmDeal=(e)=>{
+  const handleConfirmDeal = (e) => {
     e.preventDefault();
-    const deal={
-      buyerid:curReq.buyerid,
-      ownerid:curReq.ownerid,
-      reqid:curReq.reqid,
-      propid:curReq.propid,
-      date:new Date(),
-      status:"dealed"
+    const deal = {
+      buyerid: curReq.buyerid,
+      ownerid: curReq.ownerid,
+      reqid: curReq.reqid,
+      propid: curReq.propid,
+      date: new Date(),
+      status: "dealed"
     }
 
     const options = {
@@ -27,10 +27,10 @@ const DealPage = () => {
       },
       body: JSON.stringify(deal),
     };
-    fetch('http://localhost:8080/makedeal', options)
+    fetch(`${window.$restUrl}/makedeal`, options)
       .then((res) => res.json)
       .then((msg) => {
-        console.log(msg);
+        // console.log(msg);
         navigate('/myproperties');
       });
   }
